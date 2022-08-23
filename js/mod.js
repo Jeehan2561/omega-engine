@@ -67,6 +67,12 @@ var mod = {
             Utils.createRandomWord(10, new Random(Date.now()).nextInt()),
             Utils.createRandomWord(10, new Random(Math.floor(Date.now()/2)).nextInt()),
             [Utils.createRandomWord(2, new Random(Math.floor(Date.now()/3)).nextInt()),Utils.createRandomWord(3, new Random(Math.floor(Date.now()/4)).nextInt()),Utils.createRandomWord(4, new Random(Math.floor(Date.now()/5)).nextInt()),Utils.createRandomWord(5, new Random(Math.floor(Date.now()/6)).nextInt())]
+        ]],
+        ["Minecraft",
+        [
+            ["Oak", "Birch", "Spruce", "Jungle", "Acacia", "Dark oak", "Warped", "Crimson"],
+            ["Stone", "Coal", "Iron", "Gold", "Redstone", "Lapis Lazuli", "Diamond", "Deepslate", "Nether quartz", "Nether gold", "Netherrite"],
+            ["Overworld", "Nether", "End", "Aether"]
         ]]
     ],
     fonts: [
