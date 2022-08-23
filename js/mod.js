@@ -70,7 +70,7 @@ var mod = {
         ]],
         ["Minecraft",
         [
-            ["Oak", "Birch", "Spruce", "Jungle", "Acacia", "Dark oak", "Warped", "Crimson"],
+            ["Oak", "Birch", "Spruce", "Jungle", "Acacia", "Dark oak", "Warped", "Crimson", "Crafting table"],
             ["Stone", "Coal", "Iron", "Gold", "Redstone", "Lapis Lazuli", "Diamond", "Deepslate", "Nether quartz", "Nether gold", "Netherrite"],
             ["Overworld", "Nether", "End", "Aether"]
         ]]
