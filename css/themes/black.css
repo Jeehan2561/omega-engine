@@ -3,11 +3,11 @@
     --background-header: #000000;
     --color-base: #000000;
     --color-primary: #ffffff;
-    --color-hover: #404040;
-    --color-hover-strong: #404040;
+    --color-hover: #808080;
+    --color-hover-strong: #808080;
     --color-contrast: #ffffff;
     --color-success: #00ff00;
-    --button-dark: #404040;
+    --button-dark: #808080;
     --notification--error: #ff0000;
     --notification--success: #00ff00;
     --notification--special: #ffff00;
