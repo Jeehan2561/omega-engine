@@ -117,7 +117,7 @@ const game = {
         new Achievement("Another Layer?!", "Reach 1.00e20 &beta;", "&beta;", () => (game.layers[1] && game.layers[1].resource.gte(1e20))|| game.metaLayer.active),
         new Achievement("A Cube of Power", "Buy 1 <span>&beta;<sub>P<sub>8</sub></sub></span> Generator", "<span>&beta;<sub>P<sub>8</sub></sub></span>", () => (game.layers[1] && game.layers[1].powerGenerators[7].bought.gt(0))|| game.metaLayer.active),
         new Achievement("Other Times Await... Again", "Go &gamma;", "&gamma;", () => (game.layers[2] && game.layers[2].timesReset > 0)|| game.metaLayer.active),
-        new Achievement("Gamma Power", "Buy 1 <span>&gamma;<sub>P<sub>1</sub></sub></span> Generator", "<span>&gamma;<sub>P<sub>1</sub></sub></span>", () => (game.layers[1] && game.layers[1].powerGenerators[0].bought.gt(0))|| game.metaLayer.active),
+        new Achievement("Gamma Power", "Buy 1 <span>&gamma;<sub>P<sub>1</sub></sub></span> Generator", "<span>&gamma;<sub>P<sub>1</sub></sub></span>", () => (game.layers[2] && game.layers[2].powerGenerators[0].bought.gt(0))|| game.metaLayer.active),
         new Achievement("The True Time", "Go &gamma; 42 Times", "&gamma;", () => (game.layers[2] && game.layers[2].timesReset >= 42)|| game.metaLayer.active),
         new Achievement("More Gamma, more Boost", "Gain 1,000,000 &gamma;", "&gamma;", () => (game.layers[2] && game.layers[2].resource.gte(1e6))|| game.metaLayer.active),
         new Achievement("Huge Number", "Gain 1.00e100,000 &alpha;", "&alpha;", () => (game.layers[1] && game.layers[0].resource.gte("1e100000"))|| game.metaLayer.active),
