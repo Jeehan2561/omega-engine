@@ -1,11 +1,14 @@
 Vue.component("changelog-tab", {
     template: `<div class="changelog-tab">
     <guide-item>
+<<<<<<< HEAD
     <template v-slot:title>v1.7.0.3 - Lil Fix</template>
     <template v-slot:text>- Just Lil Fix<br>- Yeah That's about it by JeehanMoment
     </template>
     </guide-item>
     <guide-item>
+=======
+>>>>>>> 213df0d5ad581f9042197c68cb381c7a42db1bc4
     <template v-slot:title>v1.7.0.2 - Style up</template>
     <template v-slot:text>- Updated by jwklong (the omega engine maker)<br>- Changed cover in embed<br>- Added Elements notation (not to be confused with elemental)<br>- Some other things that wont be noticed, but may be used in a future update
     </template>
