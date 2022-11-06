@@ -194,104 +194,131 @@ Vue.component("functions-layer", {
     <p>Number is Not Unlocked Yet</p>
     </div>
     </div>
-
     <div v-if="Enhancer1">
     <h3>Enhancers</h3>
+    </div>
+
+    <div v-if="Enhancer8">
     <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer2">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer3">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer4">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVCD"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceUN"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer5">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceFM"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceFB"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer5">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.Enhancefx"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer6">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_x"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_alpha"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer6">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_beta"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_gamma"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer7">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_delta"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_epsilon"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-
-    <div v-if="Enhancer7">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_zeta"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_eta"></functions-upgrade>
-    </div>
-    </div>
-    <div v-else>
-    </div>
-    <div v-if="Enhancer8">
-    <div class="upgrades">
     <functions-upgrade :upgrade="functions.upgrades.EnhanceReStack"></functions-upgrade>
     <functions-upgrade :upgrade="functions.upgrades.EnhanceFP"></functions-upgrade>
     </div>
     </div>
-    <div v-else>
+    <div v-else-if="Enhancer7">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceUN"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFM"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFB"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.Enhancefx"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_x"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_alpha"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_beta"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_gamma"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_delta"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_epsilon"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_zeta"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_eta"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer6">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceUN"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFM"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFB"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.Enhancefx"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_x"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_alpha"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_beta"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar_gamma"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer5">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceUN"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFM"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceFB"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.Enhancefx"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVar"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer4">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceVCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceUN"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer3">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOf"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMFP"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer2">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceMLC"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceCD"></functions-upgrade>
+    </div>
+    </div>
+    <div v-else-if="Enhancer1">
+    <div class="upgrades">
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceRMBOL"></functions-upgrade>
+    <functions-upgrade :upgrade="functions.upgrades.EnhanceSF"></functions-upgrade>
+    </div>
     </div>
 </div>
 </div>`

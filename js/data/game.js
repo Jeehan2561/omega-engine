@@ -207,7 +207,7 @@ const game = {
         new Achievement("Aleph-e", "Have 2.71e8281 aleph", "<span>&aleph;<sub>e</sub></span>", () => game.alephLayer.bestaleph.gte("2.71e8281")),
         new Achievement("Much Aleph, Much wow Original", "Have 1.00e10000 aleph", "&aleph;", () => game.alephLayer.bestaleph.gte("1e10000")),
         new Achievement("Should we tell them to stop? I", "Buy 10,000 Meta Upgrades", "<img alt=\"LC\" class=\"inline\" src=\"images/layercoin.svg\"/>", () => game.restackLayer.metaUpgrade.level.gte(10000)),
-        new Achievement("Truly capped", "Let your Number multiplier reach x1.00 when your number is bigger than 1.8e308", '<span>x1.00</span>', () => Decimal.gte(game.functionsLayer.number, "1.8e308")&&Decimal.eq(game.functionsLayer.getNumberMult(), 1)),
+        new Achievement("Truly capped", "Let your Number multiplier reach x1.00 while your number is bigger than 1.8e308", '<span>x1.00</span>', () => Decimal.gte(game.functionsLayer.number, "1.8e308")&&Decimal.eq(game.functionsLayer.getNumberMult(), 1)),
     ],
     alephLayer: new AlephLayer(),
     restackLayer: new ReStackLayer(),

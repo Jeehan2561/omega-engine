@@ -230,7 +230,7 @@ onkeydown = e =>
                 game.settings.tab = tab;
             }
         }
-        if(lc === "t" && !e.ctrlKey && game.alephLayer.isUnlocked())
+        if(lc === "a" && !e.ctrlKey && game.alephLayer.isUnlocked())
         {
             game.settings.tab = "Aleph";
         }
