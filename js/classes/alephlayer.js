@@ -3,7 +3,6 @@ class AlephLayer
     constructor()
     {
         this.aleph = new Decimal(0);
-        this.bestaleph = new Decimal (0);
         this.upgrades = {
             alephGain: new AlephUpgrade("Increase your aleph gain", level => Decimal.pow(1.215, level).mul(100),
                 level => Decimal.pow(1.2 + game.restackLayer.permUpgrades.aleph.apply(), level)),
@@ -14,23 +13,28 @@ class AlephLayer
                 }),
             alephBoost: new AlephUpgrade("Gain more aleph based on the log(ℵ) you have",
                 level => new Decimal(1e6).pow(Decimal.pow(1.5, level)),
-                level => new Decimal(1).add(Decimal.max(0, game.alephLayer.aleph).add(1).log10().mul(level.add(1)).mul(0.05)).pow(2.5)),
+                level => new Decimal(1).add(Decimal.max(0, game.alephLayer.aleph).add(1).log10().mul(level).mul(0.05)).pow(2.5)),
             deltaBoost: new AlephUpgrade("Gain more &delta;",
-                level => Decimal.pow(8e4, level).mul(Decimal.pow(1.25, Decimal.pow(level, 1.25))).mul(1e3),
-                level => Decimal.pow(10, Decimal.add(level, 1).pow(1.6)).mul(Decimal.pow(level.add(1), 1.2)).mul(0.1),),
+                level => Decimal.pow(1e5, level).mul(1e3),
+                level => Decimal.pow(10, level), {
+                    maxLevel: 4
+                }),
             powerGenerators: new AlephUpgrade("All Power Generators on every Layer are stronger",
                 level => Utils.createValueDilation(Decimal.pow(1e5, Decimal.pow(level, 1.5)).mul(1e20), 0.001),
                 level => Decimal.pow(1.5, level)),
             prestigeNoPowerBoost: new AlephUpgrade("Increase Prestige Reward on all Layers that don't have Power Generators",
-                level => Utils.createValueDilation(Decimal.pow(5e7, level).mul(Decimal.pow(2, Decimal.pow(level, 1.25))).mul(1e22), 0.0125),
-                level => Decimal.pow(2, level)),
+                level => Decimal.pow(1e8, level).mul(1e22),
+                level => Decimal.pow(2, level), {
+                    maxLevel: 3
+                }),
             alephBoost2: new AlephUpgrade("Gain more aleph based on the log(log(&alpha;)) you have",
                 level => Utils.createValueDilation(Decimal.pow(1e30, level).mul(1e100), 0.01),
                 level => game.layers[0] ? Decimal.pow(new Decimal(1.1).add(level.mul(0.1)), Decimal.max(0, game.layers[0].resource).add(1).log10().add(1).log10()) : new Decimal(1)),
             betterBetaFormula: new AlephUpgrade("The &beta; Prestige Formula is better",
-                level => new Decimal(1e80).pow(level.mul(0.05).mul(level.add(1).ln().add(1)).add(1).mul(level.div(100).add(1))),
-                level => new Decimal(1).add(level.add(1).log(2).mul(Decimal.add(1.1,level.pow(0.75).mul(0.01))).pow(level.pow(0.1)).mul(0.06)), {
-                    getEffectDisplay: effectDisplayTemplates.numberStandard(3, "^")
+                level => new Decimal(1e90),
+                level => new Decimal(1).add(level.mul(0.12)), {
+                    maxLevel: 1,
+                    getEffectDisplay: effectDisplayTemplates.numberStandard(2, "^")
                 }),
             prestigeRewards: new AlephUpgrade("Increase the Prestige Reward of all Layers",
                 level => Utils.createValueDilation(Decimal.pow(1e30, level).mul(1e100), 0.005, new Decimal("1e650")),
@@ -61,7 +65,7 @@ class AlephLayer
     {
         if(functions.maxLayerUnlocked() < 3) return new Decimal(0);
         if(game.layers[3].timesReset === 0) return new Decimal(0);
-        return Decimal.pow(10, Math.max(0, functions.maxLayerUnlocked() - 3)).mul(Math.max(1, functions.maxLayerUnlocked() - 2));
+        return Decimal.pow(10, Math.max(0, functions.maxLayerUnlocked() - 3));
     }
 
     maxAll()
@@ -77,7 +81,6 @@ class AlephLayer
         if(this.isUnlocked())
         {
             this.aleph = this.aleph.add(this.getAlephGain().mul(dt));
-            this.bestaleph = Decimal.max(this.bestaleph, this.aleph);
         }
     }
 

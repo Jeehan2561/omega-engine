@@ -58,11 +58,6 @@ class Utils
         return value.pow(Decimal.max(0, value.div(start).log10().mul(strength)).add(1));
     }
 
-    static softcap(value, softcappower, start = mod.Infinities[0])
-    {
-        return (value.gte(start) ? start.mul(Decimal.pow(value.div(start), softcappower)) : value);
-    }
-
     static createRandomWord(length, seed = Date.now())
     {
         const rand = new Random(seed);

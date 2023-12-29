@@ -1,5 +1,5 @@
 const functions = {
-    formatNumber: function(n, prec = 3, prec1000 = 3, lim = new Decimal(1000))
+    formatNumber: function(n, prec, prec1000, lim = new Decimal(1000))
     {
         if(typeof n === "number")
         {
@@ -37,13 +37,7 @@ const functions = {
             }
             return Decimal.pow(10, mag % 1).toFixed(prec) + "e" + Math.floor(mag).toLocaleString("en-us", {minimumFractionDigits:0 , maximumFractionDigits:0});
         }
-        if(n.lte("1eeee1000"))
-        {
-            return "e".repeat(n.layer) + n.mag.toLocaleString("en-us", {minimumFractionDigits: prec , maximumFractionDigits: prec});
-        }
-        var slog = n.slog()
-        if (slog.gte(1e6)) return "F" + functions.formatNumber(slog.floor())
-        else return functions.formatNumber(Decimal.pow(10, slog.sub(slog.floor()))) + "F" + functions.formatNumber(slog.floor(), 0, 0);
+        return "e".repeat(n.layer) + n.mag.toLocaleString("en-us", {minimumFractionDigits: prec , maximumFractionDigits: prec});
     },
     formatTime: function(s)
     {
@@ -105,9 +99,12 @@ const functions = {
     },
     setNames: function(stuff)
     {
-        if (stuff === "refresh") {
+        if (stuff == "refresh") {
             window.location.reload();
             return
+        }
+        if (stuff[2].length != 4 && mod.debugMode == true) {
+            console.warn(`${stuff[2].length} infinity symbols detected in layer names, expected 4`)
         }
         game.settings.layerNames = stuff;
         [LETTERS, ORDERS, GIANTS] = stuff;
@@ -143,15 +140,11 @@ const functions = {
             }
             if(value instanceof Achievement)
             {
-                return {title: value.title, isCompleted: value.isCompleted};
+                return {title: value.title, isCompconsted: value.isCompconsted};
             }
             if(value instanceof AlephLayer)
             {
                 return {aleph: "d" + value.aleph, upgrades: value.upgrades};
-            }
-            if(value instanceof FunctionsLayer)
-            {
-                return {functionsPoints: "d" + value.functionsPoints, number: "d" + value.number, upgrades: value.upgrades};
             }
             if(value instanceof Generator)
             {
@@ -171,7 +164,7 @@ const functions = {
             }
             if(value instanceof ReStackLayer)
             {
-                return {layerCoins: "d" + value.layerCoins, permUpgrades: value.permUpgrades, metaUpgrade: value.metaUpgrade, upgradeTree: value.upgradeTree, timeSpent: value.timeSpent, u22Time: value.u22Time};
+                return {layerCoins: "d" + value.layerCoins, permUpgrades: value.permUpgrades, metaUpgrade: value.metaUpgrade, upgradeTree: value.upgradeTree, timeSpent: value.timeSpent};
             }
             if(value instanceof MetaLayer)
             {
@@ -274,14 +267,6 @@ const functions = {
         {
             game.alephLayer = new AlephLayer();
         }
-        if(loadObj.functionsLayer)
-        {
-            game.functionsLayer.loadFromSave(loadObj.functionsLayer);
-        }
-        else
-        {
-            game.functionsLayer = new FunctionsLayer();
-        }
         if(loadObj.automators)
         {
             for(const k of Object.keys(loadObj.automators))
@@ -297,17 +282,6 @@ const functions = {
                 if(idx !== -1)
                 {
                     game.achievements[idx].isCompleted = ach.isCompleted;
-                }
-            }
-        }
-        if(loadObj.secretachievements)
-        {
-            for(const ach of loadObj.secretachievements)
-            {
-                const idx = game.secretAchievements.findIndex(a => a.title === ach.title);
-                if(idx !== -1)
-                {
-                    game.secretAchievements[idx].isCompleted = ach.isCompleted;
                 }
             }
         }
@@ -410,21 +384,25 @@ const functions = {
     textColor: function(layer)
     {
         const lid = new Decimal(layer);
-        if(lid.gte(Infinities[3]))
+        if(lid.gte(mod.Infinities[3]))
         {
             return "#ffffff";
         }
-        if(lid.gte(Infinities[2]))
+        if(lid.gte(mod.Infinities[2]))
         {
             return "#ff9100";
         }
-        if(lid.gte(Infinities[1]))
+        if(lid.gte(mod.Infinities[1]))
         {
             return "#00ffb7";
         }
-        if(lid.gte(Infinities[0]))
+        if(lid.gte(mod.Infinities[0]))
         {
-            return "#ff00ff";
+             return "#ff00ff";
+        }
+        if(lid.lt(0))
+        {
+             return "#000000";
         }
         let h = 33 * Math.min(lid.toNumber(), 10000);
         if(lid.gt(10000))
@@ -436,15 +414,18 @@ const functions = {
     },
     textGlow: function(layer)
     {
-        const thickness = 0.025 * layer;
+        let thickness = 0.025 * layer;
+        if (thickness < 0) thickness = .4
+        layer = layer.abs()
         const t = [Math.max(0, Math.min(0.7, thickness)), Math.max(0, Math.min(0.7, thickness / 2)),
             Math.max(0, Math.min(0.7, Math.max(0, thickness - 0.3) / 4))];
-        return "0px 0px " + t[0] + "em currentcolor"+
-            ",0px 0px " + t[1] + "em currentcolor"+
-            ",0px 0px " + t[2] + "em currentcolor";
+        var color = this.textColor(layer)
+        return "0px 0px " + t[0] + "em "+color+
+            ",0px 0px " + t[1] + "em "+color+
+            ",0px 0px " + t[2] + "em "+color;
     },
     layerFinder: function(layer) {
-        layer = new Decimal(layer).sub("1")
+        layer = new Decimal(layer)
         document.getElementById("layernameoutput").style.color = this.textColor(layer)
         document.getElementById("layercoloroutput").style.color = this.textColor(layer)
         document.getElementById("layercoloroutput").innerHTML = this.textColor(layer)

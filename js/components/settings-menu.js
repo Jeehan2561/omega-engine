@@ -98,8 +98,7 @@ Vue.component("settings-menu", {
         setNames: js => functions.setNames(js),
         setFont: css => functions.setFont(css),
         setSave: info => functions.setSave(info),
-        volatilityUnlocked: () => functions.maxLayerUnlocked() >= 2,
-        functionsUnlocked: () => game.functionsLayer.isUnlocked()
+        volatilityUnlocked: () => functions.maxLayerUnlocked() >= 2
     },
     template: `<div class="settings">
 <div class="settings-panel-container">
@@ -131,7 +130,6 @@ Vue.component("settings-menu", {
             <label><input type="radio" value="0" v-model.number="settings.titleStyle"/> None</label><br/>
             <label><input type="radio" value="1" v-model.number="settings.titleStyle"/> Motd</label><br/>
             <label><input type="radio" value="2" v-model.number="settings.titleStyle"/> Current Layer</label>
-            <label v-if="functionsUnlocked"><input type="radio" value="3" v-model.number="settings.titleStyle"/> Amount of ƒP</label>
         </fieldset>
     </div>
     <div class="settings-panel">
@@ -169,26 +167,25 @@ Vue.component("settings-menu", {
     <p>Controls: M to Max All on the selected Layer<br/>
     Left and Right Arrows to change Layers<br/>
     P to Prestige the selected Layer<br/>
-    First Letter of a tab ([L]ayers, [V]olatility) to select it; C to select Achievements</p>
+    First Letter of a tab ([L]ayers, [S]ettings) to select it; C to select Achievements</p>
 </div>
 <div class="credits">
-    <h2>Layer Info Finder by jwklong</h2>
+    <h2>Layer Info Finder</h2><br>
     <h3>Layer ID:</h3>
-    <input type="input" min="1" max="Infinity" id="layerID">
-    <button onclick="functions.layerFinder(document.getElementById('layerID').value)">Get Layer</button>
-    <h3>Output:</h3>
-    <h4>Layer: <a id="layernameoutput"></a></h4>
-    <h5>Hex Color: <a id="layercoloroutput"></a></h5>
+    <input type="input" value="0" id="layerID">
+    <button onclick="functions.layerFinder(document.getElementById('layerID').value)">Get Layer Info</button><br>
+    <h3>Output:</h3><br>
+    <h4>Layer: <a id="layernameoutput"></a></h4><br>
+    <h5>Hex Color: <a id="layercoloroutput"></a></h5><br>
     <h5>Glow Info: <a id="layerglowoutput"></a></h5>
 </div>
 <div class="credits">
     <h4>Credits</h4>
     <p>Inspiration: Antimatter Dimensions by hevipelle, Infinite Layers by dan-simon</p>
     <p>Original Game (Omega Layers) created by VeproGames</p>
-    <p>Blue/Cyan Neon Theme made by grandsonwaterblood</p>
     <p>Powered by vue.js and break_eternity.min.js</p>
-    <p>` + mod.primaryName + mod.secondaryName + ` v` + mod.version +`</p>
-    ` + ((mod.primaryName + mod.secondaryName) !== "ωEngine" ? ("<p>Built with ωEngine v" + mod.engineVer + "</p>") : "") + `
+    <p>${mod.primaryName + mod.secondaryName} v${mod.primaryName + mod.secondaryName === "ωEngine" ? mod.engineVer : mod.version}</p>
+    <p>${mod.primaryName + mod.secondaryName !== "ωEngine" ? "Made with ωEngine v" + mod.engineVer : ""}</p>
 </div>
 </div>`
 })

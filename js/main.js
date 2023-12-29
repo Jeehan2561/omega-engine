@@ -6,7 +6,7 @@ let localTimer = 0;
 
 let keyMap = [];
 let tabMap = {};
-const textBoxFocused = false;
+let textBoxFocused = false;
 
 const app = new Vue({
     el: "#app",
@@ -49,11 +49,8 @@ function tickGame(seconds)
             titleInfo = "Layer "
             titleInfo += game.metaLayer.active ? functions.formatNumber(game.metaLayer.layer.add(1), 3, 0) : new Decimal(1).add(game.highestLayer);
             break;
-        case 3:
-            titleInfo = functions.formatNumber(game.functionsLayer.functionsPoints, 3, 0)
-            break;
     }
-    document.title = "Omega Layers EZ" + (game.settings.titleStyle !== 0 ? ":" : "") + " " + titleInfo;
+    document.title = "ωEngine" + (game.settings.titleStyle !== 0 ? ":" : "") + " " + titleInfo;
 
     if(saveTimer > 30)
     {
@@ -81,20 +78,14 @@ function tickGame(seconds)
         {
             game.alephLayer.maxAll();
         }
-        if(game.settings.tab === "Functions")
-        {
-            game.functionsLayer.maxAll();
-        }
         else
         {
             game.currentLayer.maxAll();
         }
     }
 
-    game.bestnumber = Decimal.max(new Decimal(game.bestnumber), game.functionsLayer.number)
     game.highestLayer = Decimal.max(new Decimal(game.highestLayer), game.layers.length - 1);
     game.highestLayer = Decimal.max(new Decimal(game.highestLayer), game.metaLayer.layer);
-    game.highestLayerpremeta = Decimal.max(new Decimal(game.layers.highestLayerpremeta), game.layers.length - 1);
     game.highestUpdatedLayer = Decimal.max(new Decimal(game.highestUpdatedLayer), game.layers.length - 1);
     game.highestUpdatedLayer = Decimal.max(new Decimal(game.highestUpdatedLayer), game.metaLayer.layer);
 
@@ -137,7 +128,6 @@ function tickGame(seconds)
         }
     }
     game.alephLayer.tick(seconds);
-    game.functionsLayer.tick(seconds);
 
     for(const k of Object.keys(game.automators))
     {
@@ -233,7 +223,7 @@ onkeydown = e =>
                 game.settings.tab = tab;
             }
         }
-        if(lc === "a" && !e.ctrlKey && game.alephLayer.isUnlocked())
+        if(lc === "t" && !e.ctrlKey && game.alephLayer.isUnlocked())
         {
             game.settings.tab = "Aleph";
         }
@@ -255,10 +245,6 @@ onkeydown = e =>
         if(lc === "l")
         {
             game.settings.tab = "Layers";
-        }
-        if(lc === "f" && !e.ctrlKey && game.highestLayer.gte("1e308"))
-        {
-            game.settings.tab = "Functions";
         }
     }
 
