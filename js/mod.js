@@ -1,18 +1,20 @@
 const mod = {
-    primaryName: "ω",
-    secondaryName: "Engine",
+    primaryName: "OL",
+    secondaryName: "RECRUMBLED",
     version: "1.0.0",
     engineVer: "1.0.1", //DO NOT MODIFY
     debugMode: false,
     Infinities: [new Decimal(2).pow(1024), new Decimal("1.8e30008"), new Decimal("1.8e300000008"), new Decimal("ee38")],
     themes: [
         ["Dark", "css/themes/dark.css"],
-        ["Dark Alt (by Jeehan2561)", "css/themes/darkalt.css"],
+        ["Dark Alt (by Cookina)", "css/themes/darkalt.css"],
         ["Modern", "css/themes/modern.css"],
+        ["Light (Legacy)", "https://veprogames.github.io/omega-layers/css/main.css"],
         ["Light", "css/themes/light.css"],
         ["Neon", "css/themes/neon.css"],
         ["Godot Blue", "css/themes/darkblue.css"],
         ["Halloween", "css/themes/spooky.css"],
+        ["Blue/Cyan Neon", "css/themes/blueneon.css"],
         ["eXPerience", "css/themes/experience.css"]
     ],
     layerNames: [
@@ -63,6 +65,11 @@ const mod = {
         ["Ubuntu", "css/fonts/ubuntu.css"],
         ["Comfortaa", "css/fonts/comfortaa.css"],
         ["Minecraft", "css/fonts/minecraft.css"],
+        ["Courier", "css/fonts/courier.css"],
+        ["DePixelHalbfett", "css/fonts/depixelhbf.css"],
+        ["Lato", "css/fonts/lato.css"],
+        ["Special Elite", "css/fonts/special-elite.css"],
+        ["Teoran", "css/fonts/teoran.css"],
     ],
     saves: [
         ["Save 1", ""],
@@ -77,4 +84,4 @@ const mod = {
 
 mod.layerNames.push(["Refresh Names", "refresh"])
 
-document.getElementById("superImportantTitle").innerHTML = "<span class='omega'>"+mod.primaryName+"</span>"+mod.secondaryName
+document.getElementById("superImportantTitle").innerHTML = "<span class='omega'>"+mod.primaryName+"</span> "+mod.secondaryName

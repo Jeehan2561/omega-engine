@@ -4,11 +4,11 @@ class PowerGenerator extends Generator
     {
         if(this.generates !== null)
         {
-            this.generates.amount = this.generates.amount.add(this.getProductionPS().mul(dt));
+            this.generates.amount = this.generates.amount.add(this.getProductionPS().mul(dt).times(game.alephLayer.upgrades.Timespeed.apply()));
         }
         else
         {
-            this.layer.power = this.layer.power.add(this.getProductionPS().mul(dt));
+            this.layer.power = this.layer.power.add(this.getProductionPS().mul(dt).times(game.alephLayer.upgrades.Timespeed.apply()));
         }
     }
 
@@ -35,6 +35,6 @@ class PowerGenerator extends Generator
         }
         multi = multi.mul(game.alephLayer.upgrades.powerGenerators.apply());
         const power = game.restackLayer.permUpgrades.powerGenerators.apply();
-        return Decimal.pow(2, Decimal.floor(this.bought.div(10))).mul(multi).pow(power);
+        return Decimal.pow(5, Decimal.floor(this.bought.div(10))).mul(multi).pow(power);
     }
 }

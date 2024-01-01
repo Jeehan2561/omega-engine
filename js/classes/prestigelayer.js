@@ -65,7 +65,7 @@ class PrestigeLayer
             if(infinityOrder.gte(6))
             {
                 const exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(mod.Infinities[0], infinityOrder)).floor().sub(1));
-                return "(" + GIANTS[0] + "↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
+                return "(" + GIANTS[0] + "↑↑" + functions.format(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
             }
             return GIANTS[0] + "<sup>" + PrestigeLayer.getNameForLayer(layer.div(mod.Infinities[0]).floor().sub(1)) + "</sup>";
         }
@@ -75,7 +75,7 @@ class PrestigeLayer
             if(infinityOrder.gte(6))
             {
                 const exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(mod.Infinities[1], infinityOrder)).floor().sub(1));
-                return "(" + GIANTS[1] + "↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
+                return "(" + GIANTS[1] + "↑↑" + functions.format(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
             }
             return GIANTS[1] + "<sup>" + PrestigeLayer.getNameForLayer(layer.div(mod.Infinities[1]).floor().sub(1)) + "</sup>";
         }
@@ -85,7 +85,7 @@ class PrestigeLayer
             if(infinityOrder.gte(6))
             {
                 const exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(mod.Infinities[2], infinityOrder)).floor().sub(1));
-                return "(" + GIANTS[2] + "↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
+                return "(" + GIANTS[2] + "↑↑" + functions.format(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
             }
             return GIANTS[2] + "<sup>" + PrestigeLayer.getNameForLayer(layer.div(mod.Infinities[2]).floor().sub(1)) + "</sup>";
         }
@@ -95,7 +95,7 @@ class PrestigeLayer
             if(infinityOrder.gte(6))
             {
                 const exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(mod.Infinities[3], infinityOrder)).floor().sub(1));
-                return "(" + GIANTS[3] + "↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
+                return "(" + GIANTS[3] + "↑↑" + functions.format(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
             }
             return GIANTS[3] + "<sup>" + PrestigeLayer.getNameForLayer(layer.div(mod.Infinities[3]).floor().sub(1)) + "</sup>";
         }
@@ -158,11 +158,11 @@ class PrestigeLayer
     createGenerators()
     {
         this.generators = [];
-        for(let i = 0; i < 10; i++)
+        for(let i = 0; i < 8; i++)
         {
-            const baseProd = i === 0 ? new Decimal(1) : new Decimal(0.2);
+            const baseProd = i === 0 ? new Decimal(1) : new Decimal(0.4).pow(i);
             this.generators.push(new Generator(this, i, i > 0 ? this.generators[i - 1] : null, i,
-                Decimal.pow(10, i + 1 + Math.max(0, i - 3) + Math.max(0, i - 6)), Decimal.pow(10, i + 3 + Math.max(0, i - 2)), baseProd));
+                Decimal.pow(10, i + 1 + Math.max(0, i - 2) + Math.max(0, i - 4)), Decimal.pow(10, i + 2 + Math.max(0, i - 1)), baseProd));
         }
     }
 
@@ -257,7 +257,7 @@ class PrestigeLayer
             power = Decimal.pow(this.getExponentialBoostFactor(), diff - 1).mul(2);
         }
         const challengePow = game.currentChallenge && game.currentChallenge.type === CHALLENGE_EFFECT_PRICES_POWER ? game.currentChallenge.applyEffect().pow(-1) : 1;
-        return this.power.add(1).pow(power.mul(1.38)).pow(challengePow);
+        return D(1.5).add(this.power.add(1).log2()).pow(power.mul(this.power.add(1).slog())).pow(challengePow);
     }
 
     hasPower()
@@ -275,11 +275,11 @@ class PrestigeLayer
             this.powerTargetLayer = game.layers[1];
             this.powerTargetType = TARGET_POWERGENERATORS;
         }
-        for(let i = 0; i < 10; i++)
+        for(let i = 0; i < 8; i++)
         {
             const rand = new Random(this.layer * (i + 1));
             const bpMult = 0.2 + 0.6 * rand.nextDouble();
-            const baseProd = new Decimal(0.02);
+            const baseProd = new Decimal(0.4).pow(i).times(10);
             this.powerGenerators.push(new PowerGenerator(this, i, i > 0 ? this.powerGenerators[i - 1] : null,
                 "P<sub>" + i + "</sub>",
                 Decimal.pow(10, Decimal.pow(2, i)).mul(bpMult).floor(), Decimal.pow(10, Decimal.pow(2, i).add(1)), baseProd));
@@ -299,7 +299,7 @@ class PrestigeLayer
         }
         const boostRes = Decimal.min(this.resource, mod.Infinities[0]).mul(Decimal.pow(Decimal.max(1, this.resource.div(mod.Infinities[0])), 0.2));
         const challengePow = game.currentChallenge && game.currentChallenge.type === CHALLENGE_EFFECT_UPGRADESTRENGTH_SIMPLEBOOST ? game.currentChallenge.applyEffect() : 1;
-        const boost = boostRes.add(1).pow(2 * Math.pow(this.getExponentialBoostFactor(), this.layer - 1)).pow(challengePow);
+        const boost = boostRes.add(2).log2().pow(2 * Math.pow(this.getExponentialBoostFactor(), this.layer - 1)).pow(challengePow);
         return this.hasSimpleBoost() ? boost : new Decimal(1);
     }
 
@@ -526,7 +526,7 @@ class PrestigeLayer
     //the factor of how much the power on the prestige formula is
     static getPrestigeCarryOverForLayer(layer)
     {
-        return 24 * Math.pow(1.1, Utils.clamp(layer - 2, 0, 5));
+        return 12 * Math.pow(1.1, Utils.clamp(layer - 2, 0, 5));
     }
 
     getPrestigeCarryOver()
@@ -733,7 +733,7 @@ class PrestigeLayer
         }
         if(this.isNonVolatile() && game.layers[this.layer + 1])
         {
-            game.layers[this.layer + 1].addResource(this.getPrestigeAmountPerSecond().mul(dt));
+            game.layers[this.layer + 1].addResource(this.getPrestigeAmountPerSecond().mul(D(dt).times(game.alephLayer.upgrades.Timespeed.apply())));
         }
         if(game.settings.autoMaxAll && this.isAutoMaxed())
         {
@@ -741,9 +741,9 @@ class PrestigeLayer
         }
         if(this.layer === 0 || this.timesReset > 0)
         {
-            this.timeSpent += dt;
+            this.timeSpent = D(this.timeSpent).add(D(dt).times(game.alephLayer.upgrades.Timespeed.apply()));
         }
-        this.resource = this.resource.mul(Decimal.pow(game.restackLayer.metaUpgrade.apply(), dt));
+        this.resource = this.resource.mul(Decimal.pow(game.restackLayer.metaUpgrade.apply(), D(dt).times(game.alephLayer.upgrades.Timespeed.apply())));
     }
 
     loadFromSave(obj)

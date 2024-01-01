@@ -111,6 +111,12 @@ header nav button:hover{
     border: 0;
 }
 
+#functionsButton {
+    background-image: radial-gradient(#00ff5a, #00a905);
+    color: white;
+    border: 0;
+}
+
 #restackButton {
     background-image: linear-gradient(90deg, #61b8ff, #ff64a0, #d5ff55);
     color: white;
@@ -530,6 +536,43 @@ p.resource-display > span:first-child{
 }
 
 .aleph-layer h3{
+    text-align: center;
+}
+
+/*Functions*/
+
+.functions{
+    font-weight: bold;
+    text-shadow: 0.07em 0 0.07em currentColor;
+}
+
+.functions-layer .boosts, .functions-layer .resource, .functions-layer .tabs{
+    text-align: center;
+}
+
+.functions-layer .boosts{
+    margin: 1rem 0;
+}
+
+.functions-layer .resource{
+    font-size: 120%;
+}
+
+.functions-layer .resource p:first-child{
+    font-size: 120%;
+}
+
+.functions-layer .upgrades{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.functions-layer .upgrades:last-child .upgrade{
+    width: 20%;
+}
+
+.functions-layer h3{
     text-align: center;
 }
 

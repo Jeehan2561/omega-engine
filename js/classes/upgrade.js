@@ -3,6 +3,8 @@ const UPGRADE_RESOURCE = 0, UPGRADE_GENERATOR = 1, UPGRADE_GENMULTI = 2, UPGRADE
 
 const RESOURCE_ALEPH = 0, RESOURCE_LAYERCOINS = 1
 
+
+
 class AbstractUpgrade
 {
     constructor(getPrice, getEffect, cfg)
@@ -37,10 +39,10 @@ class AbstractUpgrade
     {
         if(this.level.eq(this.maxLevel))
         {
-            return "x" + functions.formatNumber(this.apply(), 2, 2);
+            return "x" + format(this.apply(), 3);
         }
-        return "x" + functions.formatNumber(this.getEffect(this.level), 2, 2) + " 🠚 " +
-            "x" + functions.formatNumber(this.getEffect(this.level.add(1)), 2, 2);
+        return "x" + format(this.getEffect(this.level), 3) + " 🠚 " +
+            "x" + format(this.getEffect(this.level.add(1)), 3);
     }
 
     getPriceDisplay()
@@ -49,7 +51,7 @@ class AbstractUpgrade
         {
             return "Max";
         }
-        return functions.formatNumber(this.currentPrice(), 2, 0, 1e9);
+        return format(this.currentPrice(), 3);
     }
 
     isUnlocked()
@@ -382,10 +384,10 @@ const effectDisplayTemplates = {
         {
             if(this.level.eq(this.maxLevel))
             {
-                return prefix + functions.formatNumber(this.apply(), digits, digits) + suffix;
+                return prefix + format(this.apply(), digits, digits) + suffix;
             }
-            return prefix + functions.formatNumber(this.apply(), digits, digits) + suffix + " → "
-                + prefix + functions.formatNumber(this.getEffect(this.level.add(1)), digits, digits) + suffix;
+            return prefix + format(this.apply(), digits, digits) + suffix + " → "
+                + prefix + format(this.getEffect(this.level.add(1)), digits, digits) + suffix;
         };
     },
     percentStandard: function(digits, prefix = "", suffix = " %", digits1000 = digits)
@@ -396,10 +398,10 @@ const effectDisplayTemplates = {
             const nextVal = this.getEffect(this.level.add(1)).mul(100);
             if(this.level.eq(this.maxLevel))
             {
-                return prefix + functions.formatNumber(thisVal, digits, digits1000) + suffix;
+                return prefix + format(thisVal, digits, digits1000) + suffix;
             }
-            return prefix + functions.formatNumber(thisVal, digits, digits1000) + suffix + " → "
-                + prefix + functions.formatNumber(nextVal, digits, digits1000) + suffix;
+            return prefix + format(thisVal, digits, digits1000) + suffix + " → "
+                + prefix + format(nextVal, digits, digits1000) + suffix;
         };
     },
     automator: function()

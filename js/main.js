@@ -47,10 +47,10 @@ function tickGame(seconds)
             break;
         case 2:
             titleInfo = "Layer "
-            titleInfo += game.metaLayer.active ? functions.formatNumber(game.metaLayer.layer.add(1), 3, 0) : new Decimal(1).add(game.highestLayer);
+            titleInfo += game.metaLayer.active ? functions.format(game.metaLayer.layer.add(1), 3, true) : new Decimal(1).add(game.highestLayer);
             break;
     }
-    document.title = "ωEngine" + (game.settings.titleStyle !== 0 ? ":" : "") + " " + titleInfo;
+    document.title = "OL RECRUMBLED" + (game.settings.titleStyle !== 0 ? ":" : "") + " " + titleInfo;
 
     if(saveTimer > 30)
     {

@@ -140,7 +140,7 @@ const functions = {
             }
             if(value instanceof Achievement)
             {
-                return {title: value.title, isCompconsted: value.isCompconsted};
+                return {title: value.title, isCompconsted: value.isCompleted};
             }
             if(value instanceof AlephLayer)
             {

@@ -8,7 +8,7 @@ Vue.component("guide-tab", {
         metaUnlocked: () => game.metaLayer.active,
     },
     methods: {
-        formatNumber: (n, prec, prec1000, lim) => functions.formatNumber(n, prec, prec1000, lim)
+        format: (decimal, precision) => format(decimal, precision)
     },
     template: `<div class="guide-tab">
     <guide-item>

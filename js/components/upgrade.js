@@ -13,7 +13,7 @@ Vue.component("upgrade", {
             }
             return this.upgrade.layerCost.layer;
         },
-        formatNumber: (n, prec, prec1000, lim) => functions.formatNumber(n, prec, prec1000, lim)
+        format: (decimal, precision) => format(decimal, precision)
     },
     computed: {
         canAfford: function ()
@@ -51,6 +51,6 @@ Vue.component("upgrade", {
 <p v-html="upgrade.description"></p>
 <p v-html="upgrade.getEffectDisplay()"></p>
 <p class="price"><label v-if="!isMetaUpgrade">{{upgrade.getPriceDisplay()}}</label> <resource-name v-if="upgrade.level < upgrade.maxLevel" :layerid='getResourceLayer()'></resource-name></p>
-<p class="layer-number" v-if="showLayerNumber">#{{formatNumber(upgrade.currentLayer(), 2, 0, 1e9)}}</p>
+<p class="layer-number" v-if="showLayerNumber">#{{format(upgrade.currentLayer(), 3)}}</p>
 </button>`
 });

@@ -8,43 +8,43 @@ class ReStackLayer
         this.permUpgrades = {
             prestigeGains: new RestackLayerUpgrade("All Prestige gains are higher",
                 level => this.getPermUpgradeCost(),
-                level => Decimal.pow(128, level), {
-                    maxLevel: 2
+                level => Decimal.pow(16, level), {
+                    maxLevel: 1
                 }),
-            layerExponentialBoostFactorTime: new RestackLayerUpgrade("The Layer Exponential Factor increases over time",
+            layerExponentialBoostFactorTime: new RestackLayerUpgrade("The Layer Exponential Factor and aleph effect exponent increases over time",
                 level => this.getPermUpgradeCost(),
-                level => Math.min(1, this.timeSpent / 28800) * 3 * level.toNumber(), {
-                    maxLevel: 2,
+                level => Math.min(1, this.timeSpent / 7200) * 1 * level.toNumber(), {
+                    maxLevel: 1,
                     getEffectDisplay: effectDisplayTemplates.numberStandard(4, "+")
                 }),
             upgradeEffects: new RestackLayerUpgrade("All Upgrade Effects are stronger (including Tree Upgrades)",
                 level => this.getPermUpgradeCost(),
-                level => new Decimal(1).add(level.mul(2)), {
-                    maxLevel: 2,
-                    getEffectDisplay: effectDisplayTemplates.numberStandard(2, "^")
+                level => new Decimal(1).add(level.mul(0.5)), {
+                    maxLevel: 1,
+                    getEffectDisplay: effectDisplayTemplates.numberStandard(3, "^")
                 }),
             powerGenerators: new RestackLayerUpgrade("All Power Generators are stronger",
                 level => this.getPermUpgradeCost(),
-                level => new Decimal(1).add(level.mul(0.15)), {
-                    maxLevel: 2,
-                    getEffectDisplay: effectDisplayTemplates.numberStandard(2, "^")
+                level => new Decimal(1).add(level.mul(0.1)), {
+                    maxLevel: 1,
+                    getEffectDisplay: effectDisplayTemplates.numberStandard(3, "^")
                 }),
             aleph: new RestackLayerUpgrade("\"Increase your Aleph gain\" Upgrade scales better",
                 level => this.getPermUpgradeCost(),
                 level => 0.005 * level.toNumber(), {
-                    maxLevel: 2,
+                    maxLevel: 1,
                     getEffectDisplay: effectDisplayTemplates.numberStandard(3, "+")
                 }),
-            layerExponentialBoostFactor: new RestackLayerUpgrade("The Layer Exponential Factor is higher",
+            layerExponentialBoostFactor: new RestackLayerUpgrade("The Layer Exponential Factor nd aleph effect exponent are higher",
                 level => this.getPermUpgradeCost(),
-                level => level.toNumber(), {
-                    maxLevel: 2,
-                    getEffectDisplay: effectDisplayTemplates.numberStandard(0, "+")
+                level => (level.toNumber())/2, {
+                    maxLevel: 1,
+                    getEffectDisplay: effectDisplayTemplates.numberStandard(3, "+")
                 })
         };
         this.metaUpgrade = new RestackLayerUpgrade("All your Layer Resources are multiplied each second",
             level => new Decimal(1e10).pow(level.add("1").mul(level.add("1"))),
-            level => 1 + 0.3 * level.toNumber(),{
+            level => 1 + 0.25 * level.toNumber(),{
                 maxLevel: 5,
             });
         this.upgradeTree = [
@@ -191,13 +191,13 @@ class ReStackLayer
 
     getPermUpgradeCost()
     {
-        return Decimal.pow(5, Object.values(this.permUpgrades).filter(u => u.level.gt(0)).length + Object.values(this.permUpgrades).filter(u => u.level.gt(1)).length);
+        return Decimal.pow(4, Object.values(this.permUpgrades).filter(u => u.level.gt(0)).length + Object.values(this.permUpgrades).filter(u => u.level.gt(1)).length);
     }
 
     getRestackGain()
     {
         const l = game.metaLayer.active ? game.metaLayer.layer : new Decimal(game.layers.length - 1);
-        let gain = l >= 9 ? Decimal.pow(10, l.sub(9).floor()) : new Decimal(0);
+        let gain = l >= 9 ? Decimal.pow(5, l.sub(9).floor()).times(l.sub(8).pow(2)) : new Decimal(0);
         if (!game.metaLayer.active) {
             for (const layer of game.layers) {
                 if (layer.hasChallenges() && layer.layer >= 9) {

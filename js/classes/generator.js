@@ -17,11 +17,11 @@ class Generator
     {
         if(this.generates !== null)
         {
-            this.generates.amount = this.generates.amount.add(this.getProductionPS().mul(dt));
+            this.generates.amount = this.generates.amount.add(this.getProductionPS().mul(dt).times(game.alephLayer.upgrades.Timespeed.apply()));
         }
         else
         {
-            this.layer.addResource(this.getProductionPS().mul(dt));
+            this.layer.addResource(this.getProductionPS().mul(dt).times(game.alephLayer.upgrades.Timespeed.apply()));
         }
     }
 
@@ -44,7 +44,7 @@ class Generator
             }
         }
         //individual generator boosts and multi boost
-        let f = new Decimal(3);
+        let f = new Decimal(5);
         for(const l of game.layers)
         {
             for(const upg of l.getAllUpgrades().filter(upg => (upg.type === UPGRADE_GENERATOR && upg.cfg.generators.includes(this.id)) || upg.type === UPGRADE_GENERATOR_TIMELAYER))
@@ -72,7 +72,7 @@ class Generator
             }
         }
         const challengePow = game.currentChallenge && game.currentChallenge.effectType === CHALLENGE_EFFECT_GENMULTI ? game.currentChallenge.applyEffect() : 1;
-        return (Decimal.pow(f, Decimal.floor(this.bought.div(10))).mul(multi)).pow(challengePow);
+        return (Decimal.pow(f, Decimal.floor(this.bought.div(10))).mul(multi)).times(game.alephLayer.getAlephBoost()).pow(challengePow);
     }
 
     getProductionPS()

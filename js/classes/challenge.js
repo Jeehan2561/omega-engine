@@ -35,14 +35,14 @@ class Challenge
         switch (this.effectType)
         {
             case CHALLENGE_EFFECT_UPGRADESTRENGTH_SIMPLEBOOST:
-                return "All Upgrade and Simple Boost Effects are raised to the Power of " + this.applyEffect().toFixed(2);
+                return "All Upgrade and Simple Boost Effects are raised to the Power of " + this.applyEffect().toFixed(3);
             case CHALLENGE_EFFECT_PRICES_POWER:
-                return "All Generator and Upgrade Prices are raised to the Power of " + this.applyEffect().toFixed(2) + ". " +
-                    "Power Effects are raised to the Power of " + this.applyEffect().pow(-1).toFixed(2);
+                return "All Generator and Upgrade Prices are raised to the Power of " + this.applyEffect().toFixed(3) + ". " +
+                    "Power Effects are raised to the Power of " + this.applyEffect().pow(-1).toFixed(3);
             case CHALLENGE_EFFECT_GENMULTI:
-                return "All Generator Multipliers are raised to the Power of " + this.applyEffect().toFixed(2);
+                return "All Generator Multipliers are raised to the Power of " + this.applyEffect().toFixed(3);
             case CHALLENGE_EFFECT_PRESTIGEREWARD:
-                return "All Prestige Rewards are raised to the Power of " + this.applyEffect().toFixed(2);
+                return "All Prestige Rewards are raised to the Power of " + this.applyEffect().toFixed(3);
             default:
                 return "That's weird. Something's different..."
         }
@@ -53,15 +53,15 @@ class Challenge
         switch (this.rewardType)
         {
             case CHALLENGE_REWARD_POWERGENERATORS:
-                return "All Power Generators are x" + functions.formatNumber(this.applyReward(), 2, 2) + " stronger";
+                return "Multiply All Power Generators' Multiplier by " + format(this.applyReward(), 3) + "";
             case CHALLENGE_REWARD_GENMULTI:
-                return "All Generator Multiplicators per 10 Levels are +" + functions.formatNumber(this.applyReward(), 3, 3) + " better";
+                return "All Generator Multiplicators per 10 Levels are +" + format(this.applyReward(), 3) + " better";
             case CHALLENGE_REWARD_PRESTIGEREWARD:
-                return "Prestige Reward of Layer " + PrestigeLayer.getNameForLayer(this.cfg.layerid) + " is x" + functions.formatNumber(this.applyReward(), 2, 2) + " higher";
+                return "Prestige Reward of Layer " + PrestigeLayer.getNameForLayer(this.cfg.layerid) + " is x" + format(this.applyReward(), 3) + " higher";
             case CHALLENGE_REWARD_GENMULTI_ABS:
-                return "All Alpha Generators are x" + functions.formatNumber(this.applyReward(), 2, 2) + " stronger";
+                return "All Alpha Generators are x" + format(this.applyReward(), 3) + " stronger";
             case CHALLENGE_REWARD_RESTACK:
-                return "Restack gain is multiplied by x" + functions.formatNumber(this.applyReward(), 2, 2);
+                return "Restack gain is multiplied by x" + format(this.applyReward(), 3);
             default:
                 return "A Cake."
         }
@@ -86,7 +86,7 @@ class Challenge
 
     getResourceGoal()
     {
-        return Decimal.pow(this.goalResource, 1 + 0.2 * this.level);
+        return Decimal.pow(this.goalResource, 0.6 + 0.1 * this.level);
     }
 
     canEnter()
